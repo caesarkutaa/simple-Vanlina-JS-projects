@@ -50,19 +50,33 @@
     text-align: center;
   }
 
+  main {
+    min-height: calc(100vh - 3rem);
+    display: grid;
+    place-items: center;
+  }
 
-  .container {
+  .contanier{
     text-align: center;
   }
 
-
-  .container h2 h3 {
+   h3{
+    background: var(--clr-grey-3);
+    color: var(--clr-white);
+    padding: 1rem;
+    border-radius: var(--radius);
+    margin-bottom: 2.5rem;
+ 
+   }
+  .contanier h2 {
     background: var(--clr-black);
     color: var(--clr-white);
     padding: 1rem;
     border-radius: var(--radius);
     margin-bottom: 2.5rem;
-  }
+    
+ }
+
 
 
   .btn-hero {
