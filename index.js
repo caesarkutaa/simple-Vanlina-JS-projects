@@ -1,35 +1,29 @@
-const colors = ["Red", "Green", "Blue", "rgba(133,122,200)","f15025"];
-const hex = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, "A", "B", "C", "D", "E", "F"];
-const btnB = document.getElementById("btn")
-const colorR = document.querySelector(".color")
-const heroB = document.getElementById("hero")
-const colorsB = document.querySelector(".colors")
+//set initial count
+let count = 0
 
+const value = document.querySelector('#value')
+const btns = document.querySelectorAll('.btn')
 
-btnB.addEventListener("click", function(){
-    const randomNumber = getrandonNumber()
-    document.body.style.backgroundColor = colors[randomNumber];
-    colorR.textContent = colors[randomNumber]
-})
- 
-heroB.addEventListener("click", function(){
-    let hexColor = "#";
-    for (let i = 0; i < 6; i++) {
-      hexColor += hex[gethexNumber()];
-    }
-    colorsB.textContent = hexColor;
-  document.body.style.backgroundColor = hexColor;
-})
+ btns.forEach(function(btn){
+    btn.addEventListener("click", function(e){
+         const counter = e.currentTarget.classList;
+         if(counter.contains("decrease")){
+            count--;
+         } else if (counter.contains("reset")){
+            count = 0;
+         }else{
+           count++;
+         }
 
+         if(count > 0){
+            value.style.color ='green';
+         } else if(count <  0){
+           value.style.color = 'red'
+         }else{
+            value.style.color = 'black'
+         }
+         value.textContent = count
+    })
 
-
- function getrandonNumber(){
-    return Math.floor(Math.random() * colors.length);
-    
-}
-
-function gethexNumber(){
-    return Math.floor(Math.random() * hex.length);
-    
-}
+ })
 
