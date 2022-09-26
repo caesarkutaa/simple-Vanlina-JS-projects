@@ -7,6 +7,27 @@ body {
   text-align: center;
 }
 
+.flex-me {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.semi-main {
+  width: 100%;
+  display: flex;
+  justify-items: center;
+  justify-content: center;
+}
+
+.mr-2 {
+  margin-right: 5px;
+}
+
+.ml-2 {
+  margin-left: 5px;
+}
 
 /* ul li:first-child{
   line-height: 100%;
