@@ -1,54 +1,70 @@
- 
- let newhero = ["wonder womman", "batman"]
+// Element.getBoundingClientRect() method returns the size of an element and its position relative to the viewport.
+// pageYOffset is a read - only window property that returns the number of pixels the document has been scrolled vertically.
+// slice extracts a section of a string without modifying original string
+//offsetTop - A Number, representing the top position of the element, in pixels
 
- const inputEL =document.getElementById("text-el")
- const inputBtn = document.getElementById("input-btn")
- const ulEL = document.getElementById("ul-el")
- const deleteBtn = document.getElementById("delete-btn")
- const delBtn = document.getElementsByClassName("del-btn")
- 
+// ********** set date ************
+    const date = document.getElementById("date")
+    date.innerHTML = new Date().getFullYear();
+    // ********** close links ************
+    const navToggle = document.querySelector('.nav-toggle')
+    const linksContainer = document.querySelector('.links-container')
+    const links = document.querySelector(".links")
 
- function render(){
-    let listitems = ""
-    for(let i = 0; i < newhero.length; i++){
-        listitems += '<li class="flex-me"><span class="mr-2">' + newhero[i] +'</span> <span class="ml-2"><button onClick="deleteHero('+i+')">delete</button></span></li>'
 
+
+    navToggle.addEventListener("click", function(){
+        const containerHeight = linksContainer.getBoundingClientRect().height
+        const linksHeight = links.getBoundingClientRect().height  
+        if (containerHeight === 0){
+            linksContainer.style.height = `${linksHeight}px`;
+        } else {
+            linksContainer.style.height = 0
         }
-    ulEL.innerHTML = listitems
-
-}
-  deleteBtn.addEventListener("click", function(){
- 
-    newhero = []
-      
-  
-      render()
-  })  
-
-
-// add a new list from clicking the input button
-inputBtn.addEventListener("click", function(){
-    let trimmedVal = inputEL.value.trim()
-    if(trimmedVal.length < 1)
-        return
-    newhero.push(trimmedVal)
-    inputEL.value = ""
-    render()
- })
-  
-
-// add a new list on clicking the keyboard's "Enter" key 
-inputEL.addEventListener("keypress", function onEvent(event){
-    if (event.key === "Enter"){
-        document.getElementById("input-btn").click();
-    }
-})
-
-
-function deleteHero(index) {
-    let elemToRemove = newhero[index]
-    newhero = newhero.filter(function(value) {
-        return value != elemToRemove
+        //linksContainer.classList.toggle("show-links");
     })
-    render()
-}
+
+    // ********** fixed navbar ************
+    const navbar = document.getElementById("nav")
+    const topLink = document.querySelector(".top-link")
+
+    window.addEventListener("scroll", function(){
+        const scrollHeight = this.window.pageYOffset;
+        const navHeight = navbar.getBoundingClientRect().height;
+
+        if(scrollHeight >  navHeight){
+            navbar.classList.add("fixed-nav");
+        }else{
+            navbar.classList.remove("fixed-nav");
+        }
+
+        
+    if (scrollHeight > 500) {
+        
+
+        topLink.classList.add("show-link");
+    } else {
+        topLink.classList.remove("show-link");
+    }
+    })
+    // ********** smooth scroll ************
+
+// select links
+const scrolllinks  = document.querySelectorAll(".scroll-links")
+
+scrolllinks.forEach(function(links){
+    links.addEventListener("click", function(e){
+            //prevent default
+            e.preventDefault()
+            //navigate to specific spot
+            const id  = e.currentTarget.getAttribute("href").slice(1)
+            const element = document.getElementById(id);
+             let position = element.offsetTop
+             window.scrollTo({
+                left:0,
+                top: position
+             })
+         linksContainer.style.height = 0;
+          
+    })
+})
